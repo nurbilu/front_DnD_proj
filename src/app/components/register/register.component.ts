@@ -3,24 +3,24 @@ import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  user: any = {};
+    username: string = '';
+    password: string = '';
 
-  constructor(private authService: AuthService, private router: Router) { }
+    constructor(private authService: AuthService, private router: Router) { }
 
-  register() {
-    this.authService.register(this.user).subscribe(
-      () => {
-        this.router.navigate(['/login']);
-      },
-      (error: any) => {
-        console.error(error);
-      }
-    );
-  }
+    register() {
+        this.authService.register(this.username, this.password).subscribe(
+            data => {
+                this.router.navigate(['/login']);
+            },
+            error => {
+                console.error('Registration failed', error);
+            }
+        );
+    }
 }
-
