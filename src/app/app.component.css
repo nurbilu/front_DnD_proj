@@ -1,22 +1,8 @@
-nav {
-    background-color: #f8f9fa;
-    padding: 1rem;
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 2rem;
-  }
-  
-  nav a {
-    text-decoration: none;
-    color: #007bff;
-    font-weight: bold;
-  }
-  
-  nav a.active {
-    color: #0056b3;
-  }
-  
-  nav a:hover {
-    text-decoration: underline;
-  }
-  
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+nav ul li {
+  display: inline;
+  margin-right: 10px;
+}

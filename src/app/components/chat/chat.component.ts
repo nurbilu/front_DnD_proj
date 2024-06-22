@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../auth.service';
+import { ChatService } from '../../chat.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-chat',
@@ -8,19 +10,24 @@ import { AuthService } from '../../auth.service';
 })
 export class ChatComponent {
     message: string = '';
-    responses: string[] = [];
+    responses: any[] = [];
 
-    constructor(private authService: AuthService) { }
+    constructor(private authService: AuthService, private chatService: ChatService, private router: Router) { } // Inject ChatService and Router
 
-    sendMessage() {
-        this.authService.chat(this.message).subscribe(
-            data => {
-                this.responses.push(data.choices[0].text);
-                this.message = '';
-            },
-            error => {
-                console.error('Chat failed', error);
-            }
-        );
+    ngOnInit() {
+        // Assuming this method is part of your component lifecycle
+        this.responses = ['Welcome to Chat'];  // Set a default message to display
+    }
+
+    sendMessage(): void {
+        this.chatService.sendMessage(this.message).subscribe(response => {
+            this.responses.push(response);
+            this.message = ''; // Clear the message input after sending
+        });
+    }
+
+    logout(): void {
+        localStorage.removeItem('token');
+        this.router.navigate(['/login']);
     }
 }

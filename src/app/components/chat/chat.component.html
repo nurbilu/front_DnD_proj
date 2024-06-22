@@ -2,14 +2,11 @@
   <h2>Chat</h2>
   <div class="chat-window">
     <div *ngFor="let response of responses">
-      <p>{{ response }}</p>
+      <p>{{ response.text }}</p>
     </div>
   </div>
   <form (ngSubmit)="sendMessage()">
-    <div>
-      <input type="text" [(ngModel)]="message" name="message" placeholder="Type your message here" required>
-    </div>
+    <input type="text" [(ngModel)]="message" name="message" placeholder="Type your message here" required>
     <button type="submit">Send</button>
   </form>
 </div>
-
